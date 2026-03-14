@@ -1,0 +1,154 @@
+@import "tailwindcss";
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&display=swap");
+
+:root {
+  --red: #f26262;
+  --red-dim: rgba(242, 98, 98, 0.12);
+  --green: #3ecf8e;
+  --green-dim: rgba(62, 207, 142, 0.12);
+  --amber: #f2a444;
+  --amber-dim: rgba(242, 164, 68, 0.12);
+  --accent: #6c63ff;
+  --surface: #18181c;
+  --surface2: #202026;
+  --border: rgba(255, 255, 255, 0.07);
+  --border2: rgba(255, 255, 255, 0.12);
+  --muted: #7a7a85;
+  --muted2: #4a4a55;
+  --text: #f0efe8;
+  /* global */
+  --dotum: #ff9308;
+}
+
+body {
+  font-family: "Roboto Mono", monospace;
+  background-color: #0f0f11;
+  color: var(--text);
+}
+
+.font-mono-dm {
+  font-family: "DM Mono", monospace;
+}
+
+.stat-card {
+  position: relative;
+  overflow: hidden;
+}
+.stat-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  border-radius: 99px;
+}
+.stat-card.top-red::before {
+  background: var(--red);
+}
+.stat-card.top-green::before {
+  background: var(--green);
+}
+.stat-card.top-amber::before {
+  background: var(--amber);
+}
+.stat-card.top-accent::before {
+  background: var(--accent);
+}
+
+.glow-red {
+  box-shadow: 0 0 6px var(--red);
+}
+.glow-green {
+  box-shadow: 0 0 6px var(--green);
+}
+.glow-logo {
+  box-shadow: 0 0 8px var(--accent);
+}
+
+.field-input {
+  width: 100%;
+  background: var(--surface);
+  border: 1px solid var(--border2);
+  border-radius: 8px;
+  padding: 7px 10px;
+  font-size: 13px;
+  font-family: "DM Sans", sans-serif;
+  color: var(--text);
+  outline: none;
+  transition: border-color 0.15s;
+}
+.field-input:focus {
+  border-color: var(--accent);
+}
+.field-input::placeholder {
+  color: var(--muted2);
+}
+.field-input.error {
+  border-color: var(--red);
+}
+
+.badge-pendente {
+  color: var(--amber);
+  background: var(--amber-dim);
+}
+.badge-pago {
+  color: var(--green);
+  background: var(--green-dim);
+}
+
+.total-red {
+  color: var(--red);
+  background: var(--red-dim);
+}
+.total-green {
+  color: var(--green);
+  background: var(--green-dim);
+}
+
+.val-red {
+  color: var(--red);
+}
+.val-green {
+  color: var(--green);
+}
+.val-amber {
+  color: var(--amber);
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateX(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+.anim-fade-up {
+  animation: fadeUp 0.4s ease both;
+}
+.anim-fade-up2 {
+  animation: fadeUp 0.4s 0.05s ease both;
+}
+.anim-fade-up3 {
+  animation: fadeUp 0.4s 0.1s ease both;
+}
+.anim-fade-up4 {
+  animation: fadeUp 0.4s 0.15s ease both;
+}
+.anim-slide-in {
+  animation: slideIn 0.25s ease both;
+}

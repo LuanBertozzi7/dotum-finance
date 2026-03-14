@@ -1,0 +1,365 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dotum - Finanças</title>
+    <script src="src/main.js" defer type="module"></script>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body class="min-h-screen text-[20px]">
+    <main class="max-w-[1100px] mx-auto px-6 py-8">
+      <div class="mb-7 anim-fade-up">
+        <h1 class="text-[22px] font-semibold tracking-tight">
+          <span class="text-(--dotum)">Dotum</span> - Finanças
+        </h1>
+        <p class="text-[13px] mt-1" style="color: var(--muted)">
+          Painel para gerenciamento de contas a
+          <strong class="text-(--red)">Pagar</strong> e a
+          <strong class="text-(--green)">Receber</strong>
+        </p>
+      </div>
+
+      <div class="grid grid-cols-4 gap-3 mb-7 anim-fade-up2">
+        <div
+          class="stat-card top-red rounded-xl border p-[18px]"
+          style="background: var(--surface); border-color: var(--border)"
+        >
+          <p
+            class="text-[11px] uppercase tracking-widest mb-2"
+            style="color: var(--muted)"
+          >
+            Total a pagar
+          </p>
+          <p
+            class="font-mono-dm text-[22px] font-medium leading-none value-red"
+            id="total-pay"
+          >
+            R$ 0,00
+          </p>
+          <p
+            class="text-[11px] mt-1"
+            style="color: var(--muted)"
+            id="quantity-to-pay"
+          >
+            ainda não há contas a <span class="text-(--red)">pagar</span>
+          </p>
+        </div>
+
+        <div
+          class="stat-card top-green rounded-xl border p-[18px]"
+          style="background: var(--surface); border-color: var(--border)"
+        >
+          <p
+            class="text-[11px] uppercase tracking-widest mb-2"
+            style="color: var(--muted)"
+          >
+            Total a receber
+          </p>
+          <p
+            class="font-mono-dm text-[22px] font-medium leading-none value-green"
+            id="total-receive"
+          >
+            R$ 0,00
+          </p>
+          <p
+            class="text-[11px] mt-1"
+            style="color: var(--muted)"
+            id="quantity-to-receive"
+          >
+            ainda não há contas a <span class="text-(--green)">receber</span>
+          </p>
+        </div>
+
+        <div
+          class="stat-card top-amber rounded-xl border p-[18px]"
+          style="background: var(--surface); border-color: var(--border)"
+        >
+          <p
+            class="text-[11px] uppercase tracking-widest mb-2"
+            style="color: var(--muted)"
+          >
+            Pendentes
+          </p>
+          <p
+            class="font-mono-dm text-[22px] font-medium leading-none value-amber"
+            id="pending-count"
+          >
+            0
+          </p>
+          <p class="text-[11px] mt-1" style="color: var(--muted)">
+            sem contas <span class="text-(--amber)">pendentes</span>
+          </p>
+        </div>
+
+        <div
+          class="stat-card top-accent rounded-xl border p-[18px]"
+          style="background: var(--surface); border-color: var(--border)"
+        >
+          <p
+            class="text-[11px] uppercase tracking-widest mb-2"
+            style="color: var(--muted)"
+          >
+            Saldo geral
+          </p>
+          <p
+            class="font-mono-dm text-[22px] font-medium leading-none"
+            id="total-balance"
+          >
+            R$ 0,00
+          </p>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4 anim-fade-up3">
+        <div
+          class="rounded-xl border overflow-hidden"
+          style="background: var(--surface); border-color: var(--border)"
+        >
+          <div
+            class="flex items-center justify-between px-5 py-4 border-b"
+            style="border-color: var(--border)"
+          >
+            <div class="flex items-center gap-2">
+              <div
+                class="w-2.5 h-2.5 rounded-full glow-red"
+                style="background: var(--red)"
+              ></div>
+              <span class="text-[13px] font-semibold tracking-tight"
+                >Contas a Pagar</span
+              >
+            </div>
+            <span
+              class="font-mono-dm text-[13px] font-medium px-2.5 py-1 rounded-md total-red"
+              id="header-pay"
+              >R$ 0,00</span
+            >
+          </div>
+
+          <div
+            class="px-5 py-3.5 border-b"
+            style="background: var(--surface2); border-color: var(--border)"
+          >
+            <div
+              class="grid gap-2"
+              style="
+                grid-template-columns: 1fr 100px 100px auto;
+                align-items: end;
+              "
+            >
+              <div>
+                <label
+                  class="block text-[10px] uppercase tracking-widest mb-1"
+                  style="color: var(--muted)"
+                >
+                  Descrição
+                </label>
+                <input
+                  type="text"
+                  id="desc-pay"
+                  class="field-input"
+                  placeholder="Ex: Aluguel, Internet..."
+                />
+              </div>
+
+              <div>
+                <label
+                  class="block text-[10px] uppercase tracking-widest mb-1"
+                  style="color: var(--muted)"
+                >
+                  Valor (R$)
+                </label>
+                <input
+                  type="number"
+                  id="value-pay"
+                  class="field-input"
+                  placeholder="0,00"
+                  min="0"
+                  step="0.01"
+                />
+              </div>
+
+              <div>
+                <label
+                  class="block text-[10px] uppercase tracking-widest mb-1"
+                  style="color: var(--muted)"
+                >
+                  Vencimento
+                </label>
+                <input type="date" id="date-pay" class="field-input" />
+              </div>
+
+              <button
+                onclick="addAccount('pay')"
+                class="h-[34px] px-3 rounded-lg border text-xl leading-none cursor-pointer transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                style="
+                  background: transparent;
+                  border-color: var(--border2);
+                  color: var(--muted);
+                "
+                title="Adicionar"
+              >
+                +
+              </button>
+            </div>
+          </div>
+
+          <div id="payment-list"></div>
+
+          <div
+            class="flex items-center justify-between px-5 py-3 border-t"
+            style="background: var(--surface2); border-color: var(--border)"
+          >
+            <span
+              class="text-[11px]"
+              style="color: var(--muted)"
+              id="paid-count"
+            >
+              0 pagas / 0 total
+            </span>
+            <span
+              class="font-mono-dm text-[14px] font-medium value-red"
+              id="footer-pay"
+            >
+              R$ 0,00
+            </span>
+          </div>
+        </div>
+
+        <div
+          class="rounded-xl border overflow-hidden"
+          style="background: var(--surface); border-color: var(--border)"
+        >
+          <div
+            class="flex items-center justify-between px-5 py-4 border-b"
+            style="border-color: var(--border)"
+          >
+            <div class="flex items-center gap-2">
+              <div
+                class="w-2.5 h-2.5 rounded-full glow-green"
+                style="background: var(--green)"
+              ></div>
+              <span class="text-[13px] font-semibold tracking-tight"
+                >Contas a Receber</span
+              >
+            </div>
+            <span
+              class="font-mono-dm text-[13px] font-medium px-2.5 py-1 rounded-md total-green"
+              id="header-receive"
+              >R$ 0,00</span
+            >
+          </div>
+
+          <div
+            class="px-5 py-3.5 border-b"
+            style="background: var(--surface2); border-color: var(--border)"
+          >
+            <div
+              class="grid gap-2"
+              style="
+                grid-template-columns: 1fr 100px 100px auto;
+                align-items: end;
+              "
+            >
+              <div>
+                <label
+                  class="block text-[10px] uppercase tracking-widest mb-1"
+                  style="color: var(--muted)"
+                >
+                  Descrição
+                </label>
+                <input
+                  type="text"
+                  id="desc-receive"
+                  class="field-input"
+                  placeholder="Ex: Cliente X, Projeto..."
+                />
+              </div>
+
+              <div>
+                <label
+                  class="block text-[10px] uppercase tracking-widest mb-1"
+                  style="color: var(--muted)"
+                >
+                  Valor (R$)
+                </label>
+                <input
+                  type="number"
+                  id="value-receive"
+                  class="field-input"
+                  placeholder="0,00"
+                  min="0"
+                  step="0.01"
+                />
+              </div>
+
+              <div>
+                <label
+                  class="block text-[10px] uppercase tracking-widest mb-1"
+                  style="color: var(--muted)"
+                >
+                  Vencimento
+                </label>
+                <input type="date" id="date-receive" class="field-input" />
+              </div>
+
+              <button
+                onclick="addAccount('receive')"
+                class="h-[34px] px-3 rounded-lg border text-xl leading-none cursor-pointer transition-colors hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                style="
+                  background: transparent;
+                  border-color: var(--border2);
+                  color: var(--muted);
+                "
+                title="Adicionar"
+              >
+                +
+              </button>
+            </div>
+          </div>
+
+          <div id="receive-list"></div>
+
+          <div
+            class="flex items-center justify-between px-5 py-3 border-t"
+            style="background: var(--surface2); border-color: var(--border)"
+          >
+            <span
+              class="text-[11px]"
+              style="color: var(--muted)"
+              id="received-count"
+            >
+              0 recebidas / 0 total
+            </span>
+            <span
+              class="font-mono-dm text-[14px] font-medium value-green"
+              id="footer-receive"
+            >
+              R$ 0,00
+            </span>
+          </div>
+        </div>
+      </div>
+
+      <div
+        class="flex items-center justify-between rounded-xl border px-6 py-[18px] mt-4 anim-fade-up4"
+        style="background: var(--surface); border-color: var(--border)"
+      >
+        <div>
+          <p class="text-[12px]" style="color: var(--muted)">
+            Saldo geral (receber − pagar)
+          </p>
+          <p
+            class="font-mono-dm text-[20px] font-medium tracking-tight mt-1"
+            id="balance-bar-value"
+          >
+            R$ 0,00
+          </p>
+        </div>
+        <p class="text-[12px]" style="color: var(--muted)" id="balance-detail">
+          Adicione contas para ver o saldo
+        </p>
+      </div>
+    </main>
+  </body>
+</html>
