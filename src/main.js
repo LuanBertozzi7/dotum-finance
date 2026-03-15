@@ -167,18 +167,6 @@ function setText(id, value) {
   if (el) el.textContent = value;
 }
 
-function setTodayDate() {
-  const today = new Date();
-  setText(
-    "data-hoje",
-    today.toLocaleDateString("pt-BR", {
-      weekday: "short",
-      day: "numeric",
-      month: "short",
-    }),
-  );
-}
-
 function setupEnterKey() {
   ["pay", "receive"].forEach((type) => {
     ["desc", "value"].forEach((field) => {
@@ -196,7 +184,6 @@ window.togglePaid = togglePaid;
 window.deleteAccount = deleteAccount;
 
 document.addEventListener("DOMContentLoaded", () => {
-  setTodayDate();
   dpPay = createDatepicker("pay");
   dpReceive = createDatepicker("receive");
   setupEnterKey();

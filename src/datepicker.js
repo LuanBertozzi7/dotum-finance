@@ -89,9 +89,11 @@ export function createDatepicker(type) {
   function open() {
     const rect = trigger.getBoundingClientRect();
     const spaceBelow = window.innerHeight - rect.bottom;
+    const popupWidth = Math.min(Math.max(rect.width, 224), window.innerWidth - 16);
+    const left = Math.max(8, Math.min(rect.left, window.innerWidth - popupWidth - 8));
 
-    popup.style.left = `${rect.left}px`;
-    popup.style.width = `${Math.max(rect.width, 224)}px`;
+    popup.style.width = `${popupWidth}px`;
+    popup.style.left = `${left}px`;
 
     if (spaceBelow < 260 && rect.top > 260) {
       popup.style.top = "";
