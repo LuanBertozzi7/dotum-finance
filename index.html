@@ -9,15 +9,24 @@
   </head>
   <body class="min-h-screen text-[20px]">
     <main class="max-w-[1100px] mx-auto px-4 py-6 sm:px-6 sm:py-8">
-      <div class="mb-7 anim-fade-up">
-        <h1 class="text-[22px] font-semibold tracking-tight">
-          <span class="text-(--dotum)">Dotum</span> - Finanças
-        </h1>
-        <p class="text-[13px] mt-1" style="color: var(--muted)">
-          Painel para gerenciamento de contas a
-          <strong class="text-(--red)">Pagar</strong> e a
-          <strong class="text-(--green)">Receber</strong>
-        </p>
+      <div class="flex items-start justify-between mb-7 anim-fade-up">
+        <div>
+          <h1 class="text-[22px] font-semibold tracking-tight">
+            <span class="text-(--dotum)">Dotum</span> - Finanças
+          </h1>
+          <p class="text-[13px] mt-1" style="color: var(--muted)">
+            Painel para gerenciamento de contas a
+            <strong class="text-(--red)">Pagar</strong> e a
+            <strong class="text-(--green)">Receber</strong>
+          </p>
+        </div>
+        <button
+          onclick="logout()"
+          class="text-[11px] px-3 py-1.5 rounded-lg border cursor-pointer transition-colors hover:border-[var(--border2)] hover:text-[var(--text)]"
+          style="background: transparent; border-color: var(--border); color: var(--muted)"
+        >
+          Sair
+        </button>
       </div>
 
       <div class="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-7 anim-fade-up2">

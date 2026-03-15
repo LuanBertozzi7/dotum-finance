@@ -1,5 +1,10 @@
 import { createDatepicker } from "./datepicker.js";
 
+// Redireciona para login se não autenticado
+if (!localStorage.getItem("auth_token")) {
+  window.location.replace("/login.html");
+}
+
 let accounts = { pay: [], receive: [] };
 let nextID = 10;
 let dpPay, dpReceive;
@@ -200,6 +205,10 @@ function setupEnterKey() {
 window.addAccount = addAccount;
 window.togglePaid = togglePaid;
 window.deleteAccount = deleteAccount;
+window.logout = () => {
+  localStorage.removeItem("auth_token");
+  window.location.replace("/login.html");
+};
 
 document.addEventListener("DOMContentLoaded", () => {
   dpPay = createDatepicker("pay");

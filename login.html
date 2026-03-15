@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dotum - Entrar</title>
+    <script src="src/login.js" defer type="module"></script>
+    <link rel="stylesheet" href="/src/style.css" />
+  </head>
+  <body class="min-h-screen flex items-center justify-center px-4">
+
+    <div class="w-full max-w-[380px] anim-fade-up">
+
+      <!-- Logo -->
+      <div class="text-center mb-8">
+        <h1 class="text-[28px] font-semibold tracking-tight">
+          <span style="color: var(--dotum)">Dotum</span>
+        </h1>
+        <p class="text-[13px] mt-1" style="color: var(--muted)">
+          Painel de Finanças
+        </p>
+      </div>
+
+      <!-- Card -->
+      <div
+        class="rounded-2xl border p-8"
+        style="background: var(--surface); border-color: var(--border)"
+      >
+        <h2 class="text-[15px] font-semibold mb-1">Entrar na conta</h2>
+        <p class="text-[12px] mb-6" style="color: var(--muted)">
+          Informe suas credenciais para continuar
+        </p>
+
+        <form id="login-form" novalidate>
+
+          <div class="mb-4">
+            <label
+              class="block text-[10px] uppercase tracking-widest mb-1.5"
+              style="color: var(--muted)"
+              for="email"
+            >
+              E-mail
+            </label>
+            <input
+              type="email"
+              id="email"
+              class="field-input"
+              placeholder="seu@email.com"
+              autocomplete="email"
+            />
+          </div>
+
+          <div class="mb-6">
+            <label
+              class="block text-[10px] uppercase tracking-widest mb-1.5"
+              style="color: var(--muted)"
+              for="password"
+            >
+              Senha
+            </label>
+            <div class="relative">
+              <input
+                type="password"
+                id="password"
+                class="field-input pr-10"
+                placeholder="••••••••"
+                autocomplete="current-password"
+              />
+              <button
+                type="button"
+                id="toggle-password"
+                class="absolute right-3 top-1/2 -translate-y-1/2 border-0 bg-transparent cursor-pointer p-0 leading-none"
+                style="color: var(--muted)"
+                tabindex="-1"
+                aria-label="Mostrar senha"
+              >
+                <svg id="eye-icon" width="15" height="15" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                  <circle cx="12" cy="12" r="3"/>
+                </svg>
+                <svg id="eye-off-icon" width="15" height="15" viewBox="0 0 24 24" fill="none"
+                  stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                  class="hidden">
+                  <path d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94"/>
+                  <path d="M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19"/>
+                  <line x1="1" y1="1" x2="23" y2="23"/>
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <p
+            id="error-msg"
+            class="hidden text-[12px] mb-4 px-3 py-2 rounded-lg"
+            style="color: var(--red); background: var(--red-dim)"
+          ></p>
+
+          <button
+            type="submit"
+            id="submit-btn"
+            class="w-full py-2.5 rounded-lg text-[13px] font-medium cursor-pointer border-0 transition-opacity hover:opacity-85 active:opacity-70"
+            style="background: var(--accent); color: #fff"
+          >
+            Entrar
+          </button>
+
+        </form>
+      </div>
+
+      <p class="text-center text-[11px] mt-6" style="color: var(--muted2)">
+        Projeto de recrutamento ·
+        <a
+          href="https://dotum.com.br"
+          target="_blank"
+          rel="noopener"
+          style="color: var(--muted); text-decoration: none"
+          class="hover:underline"
+        >dotum.com.br</a>
+      </p>
+
+    </div>
+
+  </body>
+</html>
