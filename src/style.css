@@ -20,6 +20,85 @@
   --dotum: #ff9308;
 }
 
+/* Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+/* Firefox */
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+/* Datepicker popup */
+.datepicker-popup {
+  position: fixed;
+  z-index: 200;
+  background: var(--surface2);
+  border: 1px solid var(--border2);
+  border-radius: 10px;
+  padding: 12px;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.5);
+}
+
+.dp-nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.dp-nav span {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--text);
+}
+
+.dp-nav button {
+  background: transparent;
+  border: none;
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  padding: 3px 8px;
+  border-radius: 5px;
+  transition: color 0.1s, background 0.1s;
+}
+
+.dp-nav button:hover {
+  color: var(--text);
+  background: rgba(255, 255, 255, 0.07);
+}
+
+.dp-grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 2px;
+}
+
+.dp-clear {
+  display: block;
+  width: 100%;
+  margin-top: 8px;
+  padding: 5px;
+  background: transparent;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--muted);
+  font-size: 11px;
+  cursor: pointer;
+  transition: border-color 0.15s, color 0.15s;
+  font-family: inherit;
+}
+
+.dp-clear:hover {
+  border-color: var(--border2);
+  color: var(--text);
+}
+
 body {
   font-family: "Roboto Mono", monospace;
   background-color: #0f0f11;
@@ -106,13 +185,13 @@ body {
   background: var(--green-dim);
 }
 
-.val-red {
+.value-red {
   color: var(--red);
 }
-.val-green {
+.value-green {
   color: var(--green);
 }
-.val-amber {
+.value-amber {
   color: var(--amber);
 }
 
@@ -151,4 +230,32 @@ body {
 }
 .anim-slide-in {
   animation: slideIn 0.25s ease both;
+}
+
+/* Formulário de adicionar conta */
+.form-grid {
+  display: grid;
+  gap: 8px;
+  grid-template-columns: 1fr 100px 100px auto;
+  align-items: end;
+}
+
+@media (max-width: 600px) {
+  .form-grid {
+    grid-template-columns: 1fr 1fr auto;
+  }
+  .form-grid > div:first-child {
+    grid-column: 1 / -1;
+  }
+}
+
+/* Lista de itens em mobile */
+@media (max-width: 480px) {
+  .account-item {
+    flex-wrap: wrap;
+    gap: 6px 4px;
+  }
+  .account-item .item-date {
+    display: none;
+  }
 }

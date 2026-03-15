@@ -1,0 +1,14 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//c/developer/dotum-finance/$USERPROFILE/**)",
+      "Read(//c/developer/dotum-finance/$USERPROFILE/OneDrive/**)",
+      "Read(//c/developer/dotum-finance/$USERPROFILE/OneDrive - */**)",
+      "Read(//c/developer/dotum-finance/$USERPROFILE/OneDrive/Desktop/**)",
+      "Read(//c/developer/dotum-finance/$USERPROFILE/Desktop/**)",
+      "Bash(ssh:*)",
+      "Bash(sshpass:*)",
+      "Bash(find 'C:/Users/LuanB/OneDrive/Desktop/luan - pessoal' -name *.md)"
+    ]
+  }
+}

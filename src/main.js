@@ -1,5 +1,8 @@
+import { createDatepicker } from "./datepicker.js";
+
 let accounts = { pay: [], receive: [] };
 let nextID = 10;
+let dpPay, dpReceive;
 
 function formatValue(value) {
   return new Intl.NumberFormat("pt-BR", {
@@ -39,7 +42,8 @@ function addAccount(type) {
 
   descriptionEl.value = "";
   valueEl.value = "";
-  dateEl.value = "";
+  if (type === "pay") dpPay.reset();
+  else dpReceive.reset();
   descriptionEl.focus();
 
   render();
@@ -74,7 +78,7 @@ function renderList(type) {
   list.innerHTML = items
     .map(
       (a) => `
-    <div class="anim-slide-in flex items-center gap-2 px-5 py-3 border-b last:border-b-0 hover:bg-white/5 transition-colors"
+    <div class="account-item anim-slide-in flex items-center gap-2 px-4 sm:px-5 py-3 border-b last:border-b-0 hover:bg-white/5 transition-colors"
          style="border-color: var(--border);">
       <span class="flex-1 text-sm truncate" title="${a.description}" style="color: var(--text);">
         ${a.description}
@@ -82,7 +86,7 @@ function renderList(type) {
       <span class="font-mono-dm text-sm font-medium min-w-[76px] text-right ${colorClass}">
         ${formatValue(a.value)}
       </span>
-      <span class="text-xs min-w-[40px] text-right" style="color: var(--muted);">
+      <span class="item-date text-xs min-w-[40px] text-right" style="color: var(--muted);">
         ${formatDate(a.expiry_date)}
       </span>
       <button
@@ -146,7 +150,7 @@ function render() {
   balanceBarEl.style.color = balance >= 0 ? "var(--green)" : "var(--red)";
 
   setText(
-    "saldo-detail",
+    "balance-detail",
     balance > 0
       ? `Superavit de ${formatValue(balance)}`
       : balance < 0
@@ -177,7 +181,7 @@ function setTodayDate() {
 
 function setupEnterKey() {
   ["pay", "receive"].forEach((type) => {
-    ["desc", "value", "date"].forEach((field) => {
+    ["desc", "value"].forEach((field) => {
       document
         .getElementById(`${field}-${type}`)
         .addEventListener("keydown", (e) => {
@@ -193,6 +197,8 @@ window.deleteAccount = deleteAccount;
 
 document.addEventListener("DOMContentLoaded", () => {
   setTodayDate();
+  dpPay = createDatepicker("pay");
+  dpReceive = createDatepicker("receive");
   setupEnterKey();
   render();
 });
