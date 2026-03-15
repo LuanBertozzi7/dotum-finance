@@ -3,6 +3,7 @@ import { createDatepicker } from "./datepicker.js";
 let accounts = { pay: [], receive: [] };
 let nextID = 10;
 let dpPay, dpReceive;
+let initialized = false;
 
 function formatValue(value) {
   return new Intl.NumberFormat("pt-BR", {
@@ -158,6 +159,14 @@ function render() {
         : "Saldo equilibrado",
   );
 
+  if (initialized) {
+    animatePop("total-pay");
+    animatePop("total-receive");
+    animatePop("pending-count");
+    animatePop("total-balance");
+    animatePop("balance-bar-value");
+  }
+
   renderList("pay");
   renderList("receive");
 }
@@ -165,6 +174,15 @@ function render() {
 function setText(id, value) {
   const el = document.getElementById(id);
   if (el) el.textContent = value;
+}
+
+function animatePop(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.classList.remove("pop");
+  void el.offsetWidth;
+  el.classList.add("pop");
+  el.addEventListener("animationend", () => el.classList.remove("pop"), { once: true });
 }
 
 function setupEnterKey() {
@@ -188,4 +206,5 @@ document.addEventListener("DOMContentLoaded", () => {
   dpReceive = createDatepicker("receive");
   setupEnterKey();
   render();
+  initialized = true;
 });

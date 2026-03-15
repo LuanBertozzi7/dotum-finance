@@ -112,6 +112,11 @@ body {
 .stat-card {
   position: relative;
   overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
 }
 .stat-card::before {
   content: "";
@@ -135,11 +140,20 @@ body {
   background: var(--accent);
 }
 
+@keyframes glow-pulse-red {
+  0%, 100% { box-shadow: 0 0 5px var(--red); }
+  50% { box-shadow: 0 0 14px var(--red), 0 0 24px rgba(242, 98, 98, 0.25); }
+}
+@keyframes glow-pulse-green {
+  0%, 100% { box-shadow: 0 0 5px var(--green); }
+  50% { box-shadow: 0 0 14px var(--green), 0 0 24px rgba(62, 207, 142, 0.25); }
+}
+
 .glow-red {
-  box-shadow: 0 0 6px var(--red);
+  animation: glow-pulse-red 2.4s ease-in-out infinite;
 }
 .glow-green {
-  box-shadow: 0 0 6px var(--green);
+  animation: glow-pulse-green 2.4s ease-in-out infinite;
 }
 .glow-logo {
   box-shadow: 0 0 8px var(--accent);
@@ -193,6 +207,33 @@ body {
 }
 .value-amber {
   color: var(--amber);
+}
+
+@keyframes pop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(1.1); }
+  100% { transform: scale(1); }
+}
+.pop {
+  animation: pop 0.28s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+@keyframes popupIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+.datepicker-popup:not(.hidden) {
+  animation: popupIn 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+#balance-bar-value {
+  transition: color 0.4s ease;
 }
 
 @keyframes fadeUp {
