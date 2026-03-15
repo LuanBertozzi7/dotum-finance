@@ -4,6 +4,12 @@ const MONTHS = [
 ];
 const DAYS = ["D", "S", "T", "Q", "Q", "S", "S"];
 
+/**
+ * Creates a custom datepicker bound to HTML elements identified by a shared
+ * `type` prefix (e.g. "pay" → #dp-pay, #dp-pay-trigger, etc.).
+ * @param {"pay"|"receive"} type
+ * @returns {{ reset: () => void }}
+ */
 export function createDatepicker(type) {
   const wrap    = document.getElementById(`dp-${type}`);
   const trigger = document.getElementById(`dp-${type}-trigger`);
@@ -16,7 +22,9 @@ export function createDatepicker(type) {
   const nextBtn = document.getElementById(`dp-${type}-next`);
   const clearBtn = document.getElementById(`dp-${type}-clear`);
 
-  // Move o popup para o body para escapar de containers com transform (animações)
+  // Move the popup to <body> so `position: fixed` is relative to the viewport.
+  // The page-entry animations (fadeUp) create a CSS transform context that
+  // would otherwise break the popup's fixed coordinates.
   document.body.appendChild(popup);
 
   const now = new Date();
@@ -35,6 +43,7 @@ export function createDatepicker(type) {
       grid.appendChild(el);
     });
 
+    // Empty cells to align the first day with its correct weekday column.
     const firstDay = new Date(view.y, view.m, 1).getDay();
     for (let i = 0; i < firstDay; i++) {
       grid.appendChild(document.createElement("div"));
@@ -80,6 +89,7 @@ export function createDatepicker(type) {
     selected = { d, m, y };
     const dd = String(d).padStart(2, "0");
     const mm = String(m + 1).padStart(2, "0");
+    // Store as ISO 8601 in the hidden input; display DD/MM to the user.
     input.value = `${y}-${mm}-${dd}`;
     textEl.textContent = `${dd}/${mm}/${y}`;
     textEl.style.color = "var(--text)";
@@ -89,12 +99,15 @@ export function createDatepicker(type) {
   function open() {
     const rect = trigger.getBoundingClientRect();
     const spaceBelow = window.innerHeight - rect.bottom;
+
+    // Clamp width and left position so the popup never overflows the viewport.
     const popupWidth = Math.min(Math.max(rect.width, 224), window.innerWidth - 16);
     const left = Math.max(8, Math.min(rect.left, window.innerWidth - popupWidth - 8));
 
     popup.style.width = `${popupWidth}px`;
     popup.style.left = `${left}px`;
 
+    // Open upward if there is not enough space below the trigger.
     if (spaceBelow < 260 && rect.top > 260) {
       popup.style.top = "";
       popup.style.bottom = `${window.innerHeight - rect.top + 4}px`;
@@ -145,6 +158,7 @@ export function createDatepicker(type) {
     if (!wrap.contains(e.target) && !popup.contains(e.target)) close();
   });
 
+  // Close on scroll or resize to avoid misaligned positioning.
   window.addEventListener("scroll", close, true);
   window.addEventListener("resize", close);
 

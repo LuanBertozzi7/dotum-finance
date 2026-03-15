@@ -1,14 +1,15 @@
 import { createDatepicker } from "./datepicker.js";
 
-// Redireciona para login se não autenticado
+// Redirect to login if no auth token is present.
+// Replace with real JWT validation once the API is ready.
 if (!localStorage.getItem("auth_token")) {
   window.location.replace("/login.html");
 }
 
 let accounts = { pay: [], receive: [] };
-let nextID = 10;
+let nextID = 10; // starts at 10 to avoid falsy checks on id=0
 let dpPay, dpReceive;
-let initialized = false;
+let initialized = false; // prevents pop animations from firing on first render
 
 function formatValue(value) {
   return new Intl.NumberFormat("pt-BR", {
@@ -17,6 +18,7 @@ function formatValue(value) {
   }).format(value);
 }
 
+/** Converts "YYYY-MM-DD" to "DD/MM". Returns "—" if empty. */
 function formatDate(str) {
   if (!str) return "—";
   const [, m, d] = str.split("-");
@@ -139,7 +141,6 @@ function render() {
 
   setText("header-pay", formatValue(totalPay));
   setText("header-receive", formatValue(totalReceive));
-
   setText("footer-pay", formatValue(totalPay));
   setText("footer-receive", formatValue(totalReceive));
   setText(
@@ -153,7 +154,7 @@ function render() {
 
   const balanceBarEl = document.getElementById("balance-bar-value");
   balanceBarEl.textContent = formatValue(Math.abs(balance));
-  balanceBarEl.style.color = balance >= 0 ? "var(--green)" : "var(--red)";
+  balanceBarEl.style.color = balance >= 0 ? "var(--green)" : "var(--red)"; // CSS transition handles smooth color change
 
   setText(
     "balance-detail",
@@ -185,9 +186,11 @@ function animatePop(id) {
   const el = document.getElementById(id);
   if (!el) return;
   el.classList.remove("pop");
-  void el.offsetWidth;
+  void el.offsetWidth; // force reflow to restart the animation
   el.classList.add("pop");
-  el.addEventListener("animationend", () => el.classList.remove("pop"), { once: true });
+  el.addEventListener("animationend", () => el.classList.remove("pop"), {
+    once: true,
+  });
 }
 
 function setupEnterKey() {
@@ -202,6 +205,7 @@ function setupEnterKey() {
   });
 }
 
+// Exposed globally because they are called from inline onclick attributes in the HTML.
 window.addAccount = addAccount;
 window.togglePaid = togglePaid;
 window.deleteAccount = deleteAccount;

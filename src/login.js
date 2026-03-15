@@ -1,6 +1,3 @@
-// TODO: substituir pela chamada real à API quando o backend estiver pronto
-// POST /api/auth/login → { token }
-
 const form = document.getElementById("login-form");
 const emailEl = document.getElementById("email");
 const passwordEl = document.getElementById("password");
@@ -10,12 +7,11 @@ const toggleBtn = document.getElementById("toggle-password");
 const eyeIcon = document.getElementById("eye-icon");
 const eyeOffIcon = document.getElementById("eye-off-icon");
 
-// Se já está logado, redireciona direto
+// Redirect authenticated users away from the login page immediately.
 if (localStorage.getItem("auth_token")) {
   window.location.replace("/index.html");
 }
 
-// Mostrar/ocultar senha
 toggleBtn.addEventListener("click", () => {
   const isPassword = passwordEl.type === "password";
   passwordEl.type = isPassword ? "text" : "password";
@@ -56,18 +52,26 @@ form.addEventListener("submit", async (e) => {
   setLoading(true);
 
   try {
-    // --- Substituir este bloco pela chamada real à API ---
-    await new Promise((r) => setTimeout(r, 600)); // simula latência
+    // TODO: replace with a real API call once the backend is ready.
+    //   const res = await fetch("/api/auth/login", {
+    //     method: "POST",
+    //     headers: { "Content-Type": "application/json" },
+    //     body: JSON.stringify({ email, password }),
+    //   });
+    //   if (!res.ok) throw new Error("Invalid credentials");
+    //   const { token } = await res.json();
+    //   localStorage.setItem("auth_token", token);
+    await new Promise((r) => setTimeout(r, 600));
     const fakeToken = btoa(`${email}:${Date.now()}`);
     localStorage.setItem("auth_token", fakeToken);
     window.location.replace("/index.html");
-    // ----------------------------------------------------
   } catch {
     showError("Erro ao conectar. Tente novamente.");
     setLoading(false);
   }
 });
 
+// Remove error highlight as soon as the user starts correcting a field.
 [emailEl, passwordEl].forEach((el) => {
   el.addEventListener("input", () => el.classList.remove("error"));
 });
