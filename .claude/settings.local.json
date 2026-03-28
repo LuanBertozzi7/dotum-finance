@@ -8,7 +8,10 @@
       "Read(//c/developer/dotum-finance/$USERPROFILE/Desktop/**)",
       "Bash(ssh:*)",
       "Bash(sshpass:*)",
-      "Bash(find 'C:/Users/LuanB/OneDrive/Desktop/luan - pessoal' -name *.md)"
+      "Bash(find 'C:/Users/LuanB/OneDrive/Desktop/luan - pessoal' -name *.md)",
+      "WebSearch",
+      "Read(//c/Users/LuanB/.claude/**)",
+      "mcp__plugin_serena_serena__read_file"
     ]
   }
 }
